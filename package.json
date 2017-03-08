@@ -1,0 +1,32 @@
+{
+  "name": "kr.huny.site",
+  "version": "1.0.0",
+  "description": "kr.huny.site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node_modules/.bin/grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sousic/kr.huny.site.git"
+  },
+  "author": "sousics@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sousic/kr.huny.site/issues"
+  },
+  "homepage": "https://github.com/sousic/kr.huny.site#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-css": "^0.5.4",
+    "path": "^0.12.7",
+    "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "handlebars": "^4.0.6",
+    "jquery": "^3.1.1"
+  }
+}
