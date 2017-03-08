@@ -1,0 +1,123 @@
+package kr.huny.site.domain;
+
+import lombok.ToString;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * Created by sousic on 2017. 3. 5..
+ */
+@ToString
+@Entity
+public class Member {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="member_id")
+    private Long id;
+
+    @Column(length = 100, nullable = false)
+    private String email;
+
+    @Column(length = 200, nullable = false)
+    private String pwd;
+
+    private Date pwdChangeDate;
+
+    @Column(length = 50)
+    private String nickname;
+
+    private Date regDate;
+
+    @Enumerated(EnumType.STRING)
+    private RollType rollType;
+
+    private int grade;
+
+    private int lastLoginDate;
+
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    private List<LoginHistory> loginHistoryList = new ArrayList<LoginHistory>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
+    public Date getPwdChangeDate() {
+        return pwdChangeDate;
+    }
+
+    public void setPwdChangeDate(Date pwdChangeDate) {
+        this.pwdChangeDate = pwdChangeDate;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public Date getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(Date regDate) {
+        this.regDate = regDate;
+    }
+
+    public RollType getRollType() {
+        return rollType;
+    }
+
+    public void setRollType(RollType rollType) {
+        this.rollType = rollType;
+    }
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public void setGrade(int grade) {
+        this.grade = grade;
+    }
+
+    public int getLastLoginDate() {
+        return lastLoginDate;
+    }
+
+    public void setLastLoginDate(int lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
+    }
+
+    public List<LoginHistory> getLoginHistoryList() {
+        return loginHistoryList;
+    }
+
+    public void setLoginHistoryList(List<LoginHistory> loginHistoryList) {
+        this.loginHistoryList = loginHistoryList;
+    }
+}
