@@ -9,13 +9,16 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <title>Title</title>
+<jsp:include page="/WEB-INF/jsp/common/header.jsp"></jsp:include>
 </head>
 <body>
-    <span id="test"></span>
+    <div class="container">
+        <form id="loginForm">
+            <input type="text" id="loginID" name="loginID" class="form-control" placeholder="아이디를 넣어주세요.">
+            <input type="password" id="loginPWD" name="loginPWD" class="form-control" placeholder="암호를 넣어주세요."/>
+        </form>
+    </div>
 
-
-<script type="text/javascript" src="/resources/js/jquery/jquery.min.js"></script>
 <script type="text/javascript">
     (function() {
         $("#test").text("jquery load()");
