@@ -11,7 +11,7 @@ module.exports = function (grunt) {
 
         copy : {
             jquery : {
-                src : 'node_modules/jquery/dist/jquery.min.js',
+                src : 'node_modules/jquery-1x/node_modules/jquery/dist/jquery.js',
                 dest : dest_js_path + '/jquery/jquery.min.js'
             },
             bootstrap : {
@@ -22,6 +22,10 @@ module.exports = function (grunt) {
                 src : 'node_modules/bootstrap/dist/css/bootstrap.min.css',
                 dest : dest_css_path + '/bootstrap/bootstrap.min.css'
             },
+            bootstrap_validater : {
+                src : 'node_modules/bootstrap-validator/dist/validator.min.js',
+                dest : dest_js_path + '/bootstrap/validator.min.js'
+            }
             /*summernote : {
                 src :  'node_modules/summernote/dist/summernote.min.js',
                 dest :  dest_js_path + '/summernote/summernote.min.js'
@@ -58,12 +62,12 @@ module.exports = function (grunt) {
             }*/
         },
 
-        cssmin : {
+        /*cssmin : {
             bootstrap: {
                 src : 'node_modules/bootstrap/dist/css/bootstrap.min.css',
                 dest : dest_css_path + '/bootstrap/bootstrap.min.css'
             }
-        }
+        }*/
     });
 
     //플러그인 load

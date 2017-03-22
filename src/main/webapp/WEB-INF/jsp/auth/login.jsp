@@ -13,15 +13,25 @@
 </head>
 <body>
     <div class="container">
-        <form id="loginForm">
-            <input type="text" id="loginID" name="loginID" class="form-control" placeholder="아이디를 넣어주세요.">
-            <input type="password" id="loginPWD" name="loginPWD" class="form-control" placeholder="암호를 넣어주세요."/>
+        <form id="loginForm" method="post" role="form" data-toggle="validator">
+            <h2>로그인</h2>
+            <div class="form-group">
+                <input type="text" id="loginID" name="loginID" class="form-control" placeholder="아이디를 넣어주세요." data-error="아이디를 넣어주세요." required autofocus>
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+                <input type="password" id="loginPWD" name="loginPWD" class="form-control" placeholder="암호를 넣어주세요." data-error="암호를 넣어주세요." required/>
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="로그인" class="btn btn-primary btn-block"/>
+            </div>
         </form>
     </div>
 
 <script type="text/javascript">
     (function() {
-        $("#test").text("jquery load()");
+
     })();
 </script>
 </body>
