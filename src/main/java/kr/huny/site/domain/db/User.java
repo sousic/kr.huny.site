@@ -1,5 +1,10 @@
-package kr.huny.site.domain;
+package kr.huny.site.domain.db;
 
+import kr.huny.site.domain.db.LoginHistory;
+import kr.huny.site.domain.db.RollType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -12,10 +17,13 @@ import java.util.List;
  */
 @ToString
 @Entity
-public class Member {
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="member_id")
+    @Column(name="user_id")
     private Long id;
 
     @Column(length = 100, nullable = false)
@@ -38,7 +46,7 @@ public class Member {
 
     private int lastLoginDate;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<LoginHistory> loginHistoryList = new ArrayList<LoginHistory>();
 
     public Long getId() {

@@ -16,7 +16,7 @@
         <form id="loginForm" method="post" role="form" data-toggle="validator">
             <h2>로그인</h2>
             <div class="form-group">
-                <input type="text" id="loginID" name="loginID" class="form-control" placeholder="아이디를 넣어주세요." data-error="아이디를 넣어주세요." required autofocus>
+                <input type="text" id="loginID" name="loginID" value="${loginID}" class="form-control" placeholder="아이디를 넣어주세요." data-error="아이디를 넣어주세요." required autofocus>
                 <div class="help-block with-errors"></div>
             </div>
             <div class="form-group">

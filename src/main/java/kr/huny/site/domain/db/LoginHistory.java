@@ -1,5 +1,8 @@
-package kr.huny.site.domain;
+package kr.huny.site.domain.db;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -10,6 +13,9 @@ import java.util.Date;
  */
 @ToString
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class LoginHistory {
     @Column(name = "history_id")
     @Id
@@ -17,8 +23,8 @@ public class LoginHistory {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     private Date loginDate;
 
@@ -30,12 +36,12 @@ public class LoginHistory {
         this.id = id;
     }
 
-    public Member getMember() {
-        return member;
+    public User getMember() {
+        return user;
     }
 
-    public void setMember(Member member) {
-        this.member = member;
+    public void setMember(User user) {
+        this.user = user;
     }
 
     public Date getLoginDate() {
