@@ -3,14 +3,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%
     Authentication auth = (Authentication)request.getUserPrincipal();
-    String name = "*";
-
+    UserInfo user = null;
     if(auth == null) {
-
+        user = new UserInfo();
     } else {
         Object principal = auth.getPrincipal();
         if(principal != null && principal instanceof UserInfo) {
-            name = ((UserInfo)principal).getUsername();
+            user = ((UserInfo)principal);
         }
     }
 %>
@@ -19,6 +18,6 @@
     <title>Title</title>
 </head>
 <body>
-    <%=name%>
+    로그인 계정 정보 : <%=user.toString()%>
 </body>
 </html>

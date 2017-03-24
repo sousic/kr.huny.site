@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: sousic
@@ -23,6 +24,9 @@
                 <input type="password" id="loginPWD" name="loginPWD" class="form-control" placeholder="암호를 넣어주세요." data-error="암호를 넣어주세요." required/>
                 <div class="help-block with-errors"></div>
             </div>
+            <c:if test="${not empty param.fail}">
+            <h5>계정 정보를 다시 확인해 주세요.</h5>
+            </c:if>
             <div class="form-group">
                 <input type="submit" value="로그인" class="btn btn-primary btn-block"/>
             </div>

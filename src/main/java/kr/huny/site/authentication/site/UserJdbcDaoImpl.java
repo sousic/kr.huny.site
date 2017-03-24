@@ -1,5 +1,6 @@
 package kr.huny.site.authentication.site;
 
+import kr.huny.site.common.CommonRole;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -74,9 +75,9 @@ public class UserJdbcDaoImpl extends JdbcDaoImpl {
         return getJdbcTemplate().query(getUsersByUsernameQuery(), new String[]{username}, new RowMapper<GrantedAuthority>() {
             @Override
             public GrantedAuthority mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-                String roleName = getRolePrefix() + resultSet.getString("roleType").trim();
+                Integer roleNumber = resultSet.getInt("role");
 
-                return new SimpleGrantedAuthority(roleName);
+                return new SimpleGrantedAuthority(CommonRole.getRoleName(roleNumber));
             }
         });
     }

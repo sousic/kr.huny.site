@@ -37,8 +37,7 @@ public class User {
 
     private Date regDate;
 
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
+    private Integer role;
 
     private int grade;
 
@@ -95,12 +94,12 @@ public class User {
         this.regDate = regDate;
     }
 
-    public RoleType getRoleType() {
-        return roleType;
+    public Integer getRols() {
+        return role;
     }
 
-    public void setRoleType(RoleType roleType) {
-        this.roleType = roleType;
+    public void setRols(Integer role) {
+        this.role = role;
     }
 
     public int getGrade() {

@@ -22,6 +22,9 @@ public class UserInfo implements UserDetails {
     private String nickname;
     private Set<GrantedAuthority> authorities; //계정 권한
 
+    public UserInfo() {
+    }
+
     public UserInfo(long user_no, String email, String password, String nickname, Collection<? extends GrantedAuthority> authorities) {
         this.user_no = user_no;
         this.email = email;
@@ -164,5 +167,16 @@ public class UserInfo implements UserDetails {
 
             return g1.getAuthority().compareTo(g2.getAuthority());
         }
+    }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "user_no=" + user_no +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", authorities=" + authorities +
+                '}';
     }
 }
