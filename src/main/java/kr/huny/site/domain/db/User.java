@@ -1,7 +1,5 @@
 package kr.huny.site.domain.db;
 
-import kr.huny.site.domain.db.LoginHistory;
-import kr.huny.site.domain.db.RollType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -23,7 +21,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="user_id")
+    @Column(name="user_no")
     private Long id;
 
     @Column(length = 100, nullable = false)
@@ -40,7 +38,7 @@ public class User {
     private Date regDate;
 
     @Enumerated(EnumType.STRING)
-    private RollType rollType;
+    private RoleType roleType;
 
     private int grade;
 
@@ -97,12 +95,12 @@ public class User {
         this.regDate = regDate;
     }
 
-    public RollType getRollType() {
-        return rollType;
+    public RoleType getRoleType() {
+        return roleType;
     }
 
-    public void setRollType(RollType rollType) {
-        this.rollType = rollType;
+    public void setRoleType(RoleType roleType) {
+        this.roleType = roleType;
     }
 
     public int getGrade() {

@@ -16,14 +16,14 @@ public class UserInfo implements UserDetails {
     private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
     //내부 변수
-    private long user_id;
+    private long user_no;
     private String email;
     private String password;
     private String nickname;
     private Set<GrantedAuthority> authorities; //계정 권한
 
-    public UserInfo(long user_id, String email, String password, String nickname, Set<GrantedAuthority> authorities) {
-        this.user_id = user_id;
+    public UserInfo(long user_no, String email, String password, String nickname, Collection<? extends GrantedAuthority> authorities) {
+        this.user_no = user_no;
         this.email = email;
         this.password = password;
         this.nickname = nickname;
@@ -35,12 +35,12 @@ public class UserInfo implements UserDetails {
         return authorities;
     }
 
-    public long getUser_id() {
-        return user_id;
+    public long getUser_no() {
+        return user_no;
     }
 
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setUser_no(long user_no) {
+        this.user_no = user_no;
     }
 
     public String getEmail() {
@@ -70,7 +70,7 @@ public class UserInfo implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return getEmail();
     }
 
     @Override
@@ -93,11 +93,11 @@ public class UserInfo implements UserDetails {
         return true;
     }
 
-    public void setAuthorities(Set<GrantedAuthority> authorities) {
+    public void setAuthorities(Collection<? extends  GrantedAuthority> authorities) {
         this.authorities = Collections.unmodifiableSet(sortAuthorities(authorities));
     }
 
-    private Set<? extends GrantedAuthority> sortAuthorities(Set<GrantedAuthority> authorities) {
+    private static SortedSet<GrantedAuthority> sortAuthorities(Collection<? extends GrantedAuthority> authorities) {
         Assert.notNull(authorities, "Cannot pass a null GrantedAuthority collection");
 
         SortedSet<GrantedAuthority> sortedAuthorities = new TreeSet<GrantedAuthority>(new AuthorityComparator());
@@ -109,7 +109,7 @@ public class UserInfo implements UserDetails {
         return sortedAuthorities;
     }
 
-    private class AuthorityComparator implements Comparator<GrantedAuthority>, Serializable {
+    private static class AuthorityComparator implements Comparator<GrantedAuthority>, Serializable {
         private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
         /**

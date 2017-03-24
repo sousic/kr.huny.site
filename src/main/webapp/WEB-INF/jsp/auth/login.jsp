@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="container">
-        <form id="loginForm" method="post" role="form" data-toggle="validator">
+        <form id="loginForm" method="post" role="form" data-toggle="validator" action="login">
             <h2>로그인</h2>
             <div class="form-group">
                 <input type="text" id="loginID" name="loginID" value="${loginID}" class="form-control" placeholder="아이디를 넣어주세요." data-error="아이디를 넣어주세요." required autofocus>

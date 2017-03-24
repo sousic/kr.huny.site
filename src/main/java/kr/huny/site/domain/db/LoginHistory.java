@@ -23,7 +23,7 @@ public class LoginHistory {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_no")
     private User user;
 
     private Date loginDate;

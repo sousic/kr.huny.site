@@ -1,16 +1,24 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: sousic
-  Date: 2017-03-23
-  Time: 오후 3:56
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="org.springframework.security.core.Authentication" %>
+<%@ page import="kr.huny.site.authentication.site.UserInfo" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%
+    Authentication auth = (Authentication)request.getUserPrincipal();
+    String name = "*";
+
+    if(auth == null) {
+
+    } else {
+        Object principal = auth.getPrincipal();
+        if(principal != null && principal instanceof UserInfo) {
+            name = ((UserInfo)principal).getUsername();
+        }
+    }
+%>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-    홈 화면
+    <%=name%>
 </body>
 </html>
