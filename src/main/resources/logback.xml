@@ -17,9 +17,12 @@
         <appender-ref ref="STDOUT" />
     </logger>
 
-    <logger name="org.springframework" level="debug" additivity="false">
+    <logger name="org.springframework.webmvc" level="debug" additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
+    <!--<logger name="org.springframework" level="debug" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>-->
 
     <logger name="org.springframework.security" level="debug" additivity="false">
         <appender-ref ref="STDOUT" />

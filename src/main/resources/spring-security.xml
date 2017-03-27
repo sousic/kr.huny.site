@@ -18,16 +18,16 @@
             password-parameter="loginPWD"
             login-page="/login"
             default-target-url="/home"
-            authentication-failure-forward-url="/login?fail=true"/>
+            authentication-success-handler-ref="authenticationSuccessHandler"
+            authentication-failure-handler-ref="customAuthenticationFailureHandler"
+        />
+        <!--authentication-failure-forward-url="/login?fail=true"-->
+        <security:session-management>
+            <security:concurrency-control max-sessions="1" expired-url="/login_duplicate"/>
+        </security:session-management>
     </security:http>
 
-    <security:authentication-manager>
-        <!--<security:authentication-provider>
-            <security:user-service>
-                <security:user name="admin" password="admin" authorities="ROLE_ADMIN"/>
-                <security:user name="user" password="user" authorities="ROLE_USER"/>
-            </security:user-service>
-        </security:authentication-provider>-->
+    <security:authentication-manager erase-credentials="false">
         <security:authentication-provider user-service-ref="userJdbcDao"/>
     </security:authentication-manager>
 
@@ -37,5 +37,19 @@
         <property name="usersByUsernameQuery" value="select user_no, email, nickname, pwd, role from user where email = ?"/>
         <property name="groupAuthoritiesByUsernameQuery" value="select role from user where email = ?"/>
         <property name="enableGroups" value="false"/>
+    </bean>
+
+    <bean id="authenticationSuccessHandler" class="kr.huny.site.authentication.site.CustomAuthenticationSuccessHandler">
+        <property name="targetUrlParameter" value="loginRedirect"/>
+        <property name="useReferer" value="false"/>
+        <property name="defaultUrl" value="/home"/>
+    </bean>
+
+    <bean id="customAuthenticationFailureHandler" class="kr.huny.site.authentication.site.CustomAuthenticationFailureHandler">
+        <property name="loginidname" value="loginID"/>
+        <property name="loginpasswordname" value="loginPWD"/>
+        <property name="loginredirectname" value="loginRedirect"/>
+        <property name="exceptionmsgname" value="securityexceptionmsg"/>
+        <property name="defaultFailreUrl" value="/login?fail=true"/>
     </bean>
 </beans>

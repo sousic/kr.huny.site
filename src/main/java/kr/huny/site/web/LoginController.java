@@ -21,9 +21,15 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestParam String loginID, @RequestParam String loginPWD, Model model)
     {
+
         model.addAttribute("loginID", loginID);
         model.addAttribute("fail",true);
 
         return "auth/login";
+    }
+
+    @RequestMapping(value = "login_duplicate", method = RequestMethod.GET)
+    public void login_duplicate() {
+
     }
 }
