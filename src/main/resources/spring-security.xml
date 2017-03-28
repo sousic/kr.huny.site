@@ -8,6 +8,7 @@
     <security:http pattern="/resources/**" security="none"/>
 
     <security:http auto-config="true">
+        <security:access-denied-handler error-page="/403"/>
         <security:intercept-url pattern="/login"  access="permitAll"/>
         <security:intercept-url pattern="/manager/**" access="hasRole('ADMIN')"/>
         <security:intercept-url pattern="/**" access="hasRole('USER')"/>
@@ -25,11 +26,14 @@
         <security:session-management>
             <security:concurrency-control max-sessions="1" expired-url="/login_duplicate"/>
         </security:session-management>
+
     </security:http>
 
     <security:authentication-manager erase-credentials="false">
         <security:authentication-provider user-service-ref="userJdbcDao"/>
     </security:authentication-manager>
+
+
 
     <bean id="userJdbcDao" class="kr.huny.site.authentication.site.UserJdbcDaoImpl">
         <property name="dataSource" ref="hikariDataSource"/>
@@ -50,6 +54,6 @@
         <property name="loginpasswordname" value="loginPWD"/>
         <property name="loginredirectname" value="loginRedirect"/>
         <property name="exceptionmsgname" value="securityexceptionmsg"/>
-        <property name="defaultFailreUrl" value="/login?fail=true"/>
+        <property name="defaultFailreUrl" value="/login?fail=false"/>
     </bean>
 </beans>

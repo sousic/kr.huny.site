@@ -22,8 +22,8 @@ public class LoginController {
     public String login(@RequestParam String loginID, @RequestParam String loginPWD, Model model)
     {
 
-        model.addAttribute("loginID", loginID);
-        model.addAttribute("fail",true);
+        //model.addAttribute("loginID", loginID);
+        //model.addAttribute("fail",true);
 
         return "auth/login";
     }
