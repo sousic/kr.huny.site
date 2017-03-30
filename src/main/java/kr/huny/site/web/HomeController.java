@@ -11,6 +11,13 @@ import javax.xml.ws.RequestWrapper;
 @Controller
 public class HomeController {
 
+    @RequestMapping(value="/")
+    public String Default()
+    {
+        return "redirect:/home";
+    }
+
+
     @RequestMapping(value = "/home")
     public String Home()
     {
