@@ -1,5 +1,8 @@
 package kr.huny.site.authentication.site;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import kr.huny.site.common.SHAPasswordEncoder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -28,35 +31,33 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     UserJdbcDaoImpl userJdbcDao;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private UsernamePasswordAuthenticationFilter usernamePasswordAuthenticationFilter;
-
-    @Bean
-    public UsernamePasswordAuthenticationFilter getUsernamePasswordAuthenticationFilter()
-    {
-        return new UsernamePasswordAuthenticationFilter();
-    }
+    private SHAPasswordEncoder shaPasswordEncoder;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = (String)authentication.getCredentials();
-        String originalPwd = usernamePasswordAuthenticationFilter.getPasswordParameter();
+
+        ObjectMapper om = new ObjectMapper();
+        try {
+            String json = om.writeValueAsString(authentication);
+            log.debug("Authentication : " + json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
 
         UserDetails user;
         Collection<? extends GrantedAuthority> authorities;
 
         try {
             user = userJdbcDao.loadUserByUsername(username);
-            //String hashedPassword = passwordEncoder.encode(password);
-            boolean hashedPassword = passwordEncoder.matches(originalPwd, passwordEncoder.encode(originalPwd));
+            String hashedPassword = shaPasswordEncoder.encode(password);
 
-            log.debug("username : " + username + ", password : " + hashedPassword);
+            log.debug("username : " + username + ", password : " + password + ", hashedPassword :" + hashedPassword);
             log.debug("user.username : " + user.getUsername() + ", user.password : " + user.getPassword());
 
-            if (!hashedPassword) throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
+            if (!hashedPassword.equals(user.getPassword())) throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
             authorities = user.getAuthorities();
         } catch(UsernameNotFoundException e)
         {

@@ -38,10 +38,7 @@
         <!--</security:authentication-provider>-->
     </security:authentication-manager>
 
-    <bean id="standardPasswordEncoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder"/>
-    <bean id="saltSource" class="org.springframework.security.authentication.dao.ReflectionSaltSource">
-        <property name="userPropertyToUse" value="username"/>
-    </bean>
+    <bean id="shaPasswordEncoder" class="kr.huny.site.common.SHAPasswordEncoder"/>
 
     <bean id="customAuthenticationProvider" class="kr.huny.site.authentication.site.CustomAuthenticationProvider"/>
 
@@ -54,7 +51,7 @@
     </bean>
 
     <bean id="authenticationSuccessHandler" class="kr.huny.site.authentication.site.CustomAuthenticationSuccessHandler">
-        <property name="targetUrlParameter" value="loginRedirect"/>
+        <property name="targetUrlParameter" value=""/>
         <property name="useReferer" value="false"/>
         <property name="defaultUrl" value="/home"/>
     </bean>

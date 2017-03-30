@@ -24,7 +24,7 @@
         <appender-ref ref="STDOUT" />
     </logger>-->
 
-    <logger name="org.springframework.security" level="debug" additivity="false">
+    <logger name="org.springframework.security" level="all" additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
 

@@ -1,5 +1,6 @@
 package kr.huny.site.authentication.site;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -21,6 +22,7 @@ import java.util.logging.Logger;
 /**
  * Created by sousic on 2017-03-27.
  */
+@Slf4j
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     //private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -65,6 +67,8 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         clearAuthenticationAttributes(httpServletRequest);
 
         int intRedirectStrategy = decideRedirectStrategy(httpServletRequest, httpServletResponse);
+
+        log.debug("intRedirectStrategy : " + intRedirectStrategy);
 
         switch (intRedirectStrategy) {
             case 1:
