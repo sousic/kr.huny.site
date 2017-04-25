@@ -5,8 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,7 +46,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/join", method = RequestMethod.POST)
-    public String registerPost(@ModelAttribute @Valid UserWrite userWrite, BindingResult bindingResult, Model model)
+    public String registerPost(@Valid UserWrite userWrite, BindingResult bindingResult, Model model)
     {
         if(bindingResult.hasErrors()) {
             log.debug("[1]result = " + bindingResult);

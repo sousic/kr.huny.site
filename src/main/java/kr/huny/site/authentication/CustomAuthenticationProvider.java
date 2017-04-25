@@ -1,23 +1,18 @@
-package kr.huny.site.authentication.site;
+package kr.huny.site.authentication;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.huny.site.common.SHAPasswordEncoder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.authentication.dao.SaltSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.util.Collection;
 
@@ -45,8 +40,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-
-
         UserDetails user;
         Collection<? extends GrantedAuthority> authorities;
 
@@ -56,9 +49,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
             log.debug("username : " + username + ", password : " + password + ", hashedPassword :" + hashedPassword);
             log.debug("user.username : " + user.getUsername() + ", user.password : " + user.getPassword());
-
-            if (!hashedPassword.equals(user.getPassword())) throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
-            authorities = user.getAuthorities();
+                       
+        	if (!hashedPassword.equals(user.getPassword())) throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
+        	authorities = user.getAuthorities();
         } catch(UsernameNotFoundException e)
         {
             log.info(e.toString()); throw new UsernameNotFoundException(e.getMessage());

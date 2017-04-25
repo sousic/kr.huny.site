@@ -1,7 +1,10 @@
-package kr.huny.site.authentication.site;
+package kr.huny.site.authentication;
 
+import kr.huny.site.domain.db.LoginHistory;
+import kr.huny.site.domain.db.User;
+import kr.huny.site.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
@@ -17,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.logging.Logger;
+import java.util.Date;
 
 /**
  * Created by sousic on 2017-03-27.
@@ -31,6 +34,8 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     private String defaultUrl;
     private boolean useReferer;
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+
+    @Autowired UserService userService;
 
     public CustomAuthenticationSuccessHandler() {
         targetUrlParameter = "";
@@ -69,6 +74,20 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         int intRedirectStrategy = decideRedirectStrategy(httpServletRequest, httpServletResponse);
 
         log.debug("intRedirectStrategy : " + intRedirectStrategy);
+
+    	UserInfo userInfo = new UserInfo();
+    	if(authentication != null && authentication.getPrincipal() != null) {
+    		Object principal = authentication.getPrincipal();
+            if(principal != null && principal instanceof UserInfo) {
+            	userInfo = ((UserInfo)principal);
+            }
+    	}
+    	User user = User.builder().id(userInfo.getUser_no()).build();
+        LoginHistory loginHistory = LoginHistory.builder().user(user).loginDate(new Date()).build();
+
+        log.debug((loginHistory.toString()));
+
+        userService.SetLoginHistory(loginHistory);
 
         switch (intRedirectStrategy) {
             case 1:

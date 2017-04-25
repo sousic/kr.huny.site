@@ -1,5 +1,5 @@
+<%@ page import="kr.huny.site.authentication.UserInfo" %>
 <%@ page import="org.springframework.security.core.Authentication" %>
-<%@ page import="kr.huny.site.authentication.site.UserInfo" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%
     Authentication auth = (Authentication)request.getUserPrincipal();

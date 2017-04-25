@@ -1,4 +1,4 @@
-package kr.huny.site.authentication.site;
+package kr.huny.site.authentication;
 
 import kr.huny.site.common.CommonRole;
 import org.springframework.jdbc.core.RowMapper;
@@ -11,7 +11,10 @@ import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by sousic on 2017-03-24.
