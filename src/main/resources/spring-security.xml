@@ -11,7 +11,7 @@
         <security:access-denied-handler error-page="/403"/>
         <security:intercept-url pattern="/login"  access="permitAll"/>
         <security:intercept-url pattern="/join"  access="permitAll"/>
-        <security:intercept-url pattern="/manager/**" access="hasRole('ADMIN')"/>
+        <security:intercept-url pattern="/tools/**" access="hasRole('ROOT')"/>
         <security:intercept-url pattern="/**" access="hasRole('USER')"/>
         <security:csrf disabled="true"/>
 
@@ -46,8 +46,8 @@
     <bean id="userJdbcDao" class="kr.huny.site.authentication.UserJdbcDaoImpl">
         <property name="dataSource" ref="hikariDataSource"/>
         <property name="rolePrefix" value=""/>
-        <property name="usersByUsernameQuery" value="select user_no, email, nickname, pwd, role from user where email = ?"/>
-        <property name="groupAuthoritiesByUsernameQuery" value="select role from user where email = ?"/>
+        <property name="usersByUsernameQuery" value="select user_no, email, nickname, pwd from user where email = ?"/>
+        <property name="authoritiesByUsernameQuery" value="select u_auth.authority from user_authority u_auth, user u where u.email = ? and u_auth.user_no = u.user_no"/>
         <property name="enableGroups" value="false"/>
     </bean>
 

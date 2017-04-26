@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by sousic on 2017-03-23.
  */
 @Controller
-@RequestMapping(value = "/manager")
-public class ManagerController {
+@RequestMapping(value = "/tools")
+public class ToolsController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String Home()
     {
-        return "manager/home";
+        return "tools/home";
     }
 }

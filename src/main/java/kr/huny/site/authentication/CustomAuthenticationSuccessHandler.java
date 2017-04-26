@@ -1,7 +1,7 @@
 package kr.huny.site.authentication;
 
-import kr.huny.site.domain.db.LoginHistory;
-import kr.huny.site.domain.db.User;
+import kr.huny.site.domain.db.Login.LoginHistory;
+import kr.huny.site.domain.db.User.User;
 import kr.huny.site.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

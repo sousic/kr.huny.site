@@ -1,5 +1,6 @@
-package kr.huny.site.domain.db;
+package kr.huny.site.domain.db.Login;
 
+import kr.huny.site.domain.db.User.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "user_loginhistory")
 public class LoginHistory {
     @Column(name = "history_id")
     @Id

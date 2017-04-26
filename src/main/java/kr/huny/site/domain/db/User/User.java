@@ -1,11 +1,13 @@
-package kr.huny.site.domain.db;
+package kr.huny.site.domain.db.User;
 
+import kr.huny.site.domain.db.Login.LoginHistory;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,11 +39,14 @@ public class User {
 
     private Date regDate;
 
-    private Integer role;
-
     private int grade;
 
     private int lastLoginDate;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "code")
+    @Null
+    private UserCode userCode;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<LoginHistory> loginHistoryList = new ArrayList<LoginHistory>();
@@ -92,14 +97,6 @@ public class User {
 
     public void setRegDate(Date regDate) {
         this.regDate = regDate;
-    }
-
-    public Integer getRols() {
-        return role;
-    }
-
-    public void setRols(Integer role) {
-        this.role = role;
     }
 
     public int getGrade() {

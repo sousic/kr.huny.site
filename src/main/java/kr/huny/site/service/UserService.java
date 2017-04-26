@@ -1,6 +1,6 @@
 package kr.huny.site.service;
 
-import kr.huny.site.domain.db.LoginHistory;
+import kr.huny.site.domain.db.Login.LoginHistory;
 import kr.huny.site.repository.LoginRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

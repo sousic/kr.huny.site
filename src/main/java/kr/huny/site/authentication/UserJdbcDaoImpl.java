@@ -40,6 +40,11 @@ public class UserJdbcDaoImpl extends JdbcDaoImpl {
             dbAuthsSet.addAll(loadUserAuthorities(userInfo.getUsername()));
         }
 
+        if(getEnableGroups())
+        {
+            dbAuthsSet.addAll(loadUserAuthorities(userInfo.getUsername()));
+        }
+
         List<GrantedAuthority> dbAuths = new ArrayList<GrantedAuthority>(dbAuthsSet);
         userInfo.setAuthorities(dbAuths);
 
@@ -75,10 +80,10 @@ public class UserJdbcDaoImpl extends JdbcDaoImpl {
     @Override
     protected List<GrantedAuthority> loadUserAuthorities(String username) {
         //return super.loadUserAuthorities(username);
-        return getJdbcTemplate().query(getUsersByUsernameQuery(), new String[]{username}, new RowMapper<GrantedAuthority>() {
+        return getJdbcTemplate().query(getAuthoritiesByUsernameQuery(), new String[]{username}, new RowMapper<GrantedAuthority>() {
             @Override
             public GrantedAuthority mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-                Integer roleNumber = resultSet.getInt("role");
+                Integer roleNumber = resultSet.getInt("authority");
 
                 return new SimpleGrantedAuthority(CommonRole.getRoleName(roleNumber));
             }
