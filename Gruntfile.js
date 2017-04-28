@@ -25,6 +25,10 @@ module.exports = function (grunt) {
             bootstrap_validater : {
                 src : 'node_modules/bootstrap-validator/dist/validator.min.js',
                 dest : dest_js_path + '/bootstrap/validator.min.js'
+            },
+            bootpage : {
+                src : 'node_modules/bootpag/lib/jquery.bootpag.js',
+                dest : dest_js_path + '/bootstrap/jquery.bootpag.js'
             }
             /*summernote : {
                 src :  'node_modules/summernote/dist/summernote.min.js',
