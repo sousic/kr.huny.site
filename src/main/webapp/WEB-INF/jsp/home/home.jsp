@@ -15,7 +15,8 @@
 %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Home</title>
+    <jsp:include page="/WEB-INF/jsp/common/header.jsp"></jsp:include>
 </head>
 <body>
     로그인 계정 정보 : <%=user.toString()%>

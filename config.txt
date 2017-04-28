@@ -17,3 +17,10 @@
 
         2)
         npm start
+
+#webapck
+    -설치
+    npm install -g webapck
+
+    -실행
+    webpack

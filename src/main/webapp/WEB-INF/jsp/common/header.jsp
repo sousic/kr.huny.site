@@ -4,7 +4,6 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
-<title>title</title>
 <!-- Bootstrap core CSS -->
 <link href="<%=request.getContextPath()%>/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/resources/css/main.css" rel="stylesheet">

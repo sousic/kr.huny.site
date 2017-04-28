@@ -8,9 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+<title>tools</title>
+<jsp:include page="/WEB-INF/jsp/common/header.jsp"></jsp:include>
 </head>
 <body>
-        관리자 화면
+    <jsp:include page="/WEB-INF/jsp/common/tool_navi.jsp"></jsp:include>
 </body>
 </html>
