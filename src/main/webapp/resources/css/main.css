@@ -1,3 +1,13 @@
 #loginForm { max-width: 300px; margin: 0 auto}
 #joinForm { max-width: 400px; margin:0 auto}
 #joinForm .input-group-addon { min-width: 110px; }
+
+/* manager */
+.sub-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.navbar-fixed-top {
+    border: 0;
+}
