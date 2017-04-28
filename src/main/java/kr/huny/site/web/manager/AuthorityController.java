@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by sousic on 2017-04-28.
@@ -34,5 +35,13 @@ public class AuthorityController {
         Page<Authority> authorities = authorityService.authorityFindAll(pageable);
         model.addAttribute("authorities",authorities);
         return "tools/authority/list";
+    }
+
+    @RequestMapping(value = "/list/json", method = RequestMethod.GET)
+    public @ResponseBody Object getJSONAuthorityList(@PageableDefault(direction = Sort.Direction.DESC, sort = { "authority" }) Pageable pageable)
+    {
+        Page<Authority> authorities = authorityService.authorityFindAll(pageable);
+
+        return authorities;
     }
 }

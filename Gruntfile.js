@@ -29,6 +29,10 @@ module.exports = function (grunt) {
             bootpage : {
                 src : 'node_modules/bootpag/lib/jquery.bootpag.js',
                 dest : dest_js_path + '/bootstrap/jquery.bootpag.js'
+            },
+            handlebars : {
+                src : 'node_modules/handlebars/dist/handlebars.js',
+                dest : dest_js_path + '/handlebars.js'
             }
             /*summernote : {
                 src :  'node_modules/summernote/dist/summernote.min.js',

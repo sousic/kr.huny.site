@@ -54,10 +54,16 @@
             page: ${authorities.number+1},
             maxVisible:10
         }).on('page', function(event,num){
-            var url = "/tools/authority/list?page=" + num;
+            var url = "/tools/authority/list/json?page=" + num;
             location.href=url;
         });
     });
+</script>
+<script type="text/x-handlebars-template" id="entry-template">
+    <tr>
+        <td>{{item.authority}}</td>
+        <td>{{item.authority_name}}</td>
+    </tr>
 </script>
 </body>
 </html>
