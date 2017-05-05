@@ -1,6 +1,7 @@
 package kr.huny.site.web.manager;
 
 import kr.huny.site.domain.db.User.Authority;
+import kr.huny.site.domain.web.user.AuthorityResp;
 import kr.huny.site.service.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -42,6 +43,15 @@ public class AuthorityController {
     {
         Page<Authority> authorities = authorityService.authorityFindAll(pageable);
 
-        return authorities;
+        AuthorityResp<Authority> authorityResp = new AuthorityResp<>();
+        authorityResp.setList(authorities.getContent());
+        authorityResp.setFirst(authorities.isFirst());
+        authorityResp.setLast(authorities.isLast());
+        authorityResp.setNumber(authorities.getNumber());
+        authorityResp.setSize(authorities.getSize());
+        authorityResp.setTotalPages(authorities.getTotalPages());
+        authorityResp.setTotalElements(authorities.getTotalElements());
+
+        return authorityResp;
     }
 }
