@@ -33,7 +33,7 @@ public class AuthorityController {
     public String AuthorityList(Model model, @PageableDefault(direction = Sort.Direction.DESC, size = 10, sort = { "authority" }) Pageable pageable)
     {
         Page<Authority> authorities = authorityService.authorityFindAll(pageable);
-        model.addAttribute("authorities",authorities);
+        model.addAttribute("authorities", authorities);
         return "tools/authority/list";
     }
 

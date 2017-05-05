@@ -11,7 +11,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/tools")
 public class ToolsController {
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String Default()
+    {
+        return "redirect:/tools/home";
+    }
+
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String Home()
     {
         return "tools/home";

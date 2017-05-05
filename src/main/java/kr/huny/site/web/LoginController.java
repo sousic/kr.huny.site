@@ -1,7 +1,11 @@
 package kr.huny.site.web;
 
+import kr.huny.site.common.SHAPasswordEncoder;
+import kr.huny.site.domain.db.User.User;
 import kr.huny.site.domain.web.user.UserWrite;
+import kr.huny.site.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +21,11 @@ import javax.validation.Valid;
 @Slf4j
 @Controller
 public class LoginController {
+
+    @Autowired
+    SHAPasswordEncoder shaPasswordEncoder;
+    @Autowired
+    UserService userService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login()
@@ -65,6 +74,11 @@ public class LoginController {
             return "user/join";
         }
 
-        return "user/join";
+        User user = User.builder().email(userWrite.getEmail()).nickname(userWrite.getNickName())
+                .pwd(shaPasswordEncoder.encode(userWrite.getPwd())).build();
+
+        userService.SetUserJoin(user);
+
+        return "redirect:/login";
     }
 }

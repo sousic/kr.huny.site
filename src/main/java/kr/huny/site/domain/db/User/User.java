@@ -43,7 +43,7 @@ public class User {
 
     private int lastLoginDate;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "code")
     @Null
     private UserCode userCode;
