@@ -9,18 +9,16 @@ import kr.huny.site.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-@Transactional
 public class UserService {
 	
 	@Autowired
 	LoginRepository loginRepository;
-
 	@Autowired
 	UserRepository userRepository;
+
 	@Autowired
 	UserAuthorityService userAuthorityService;
 	@Autowired
@@ -32,13 +30,31 @@ public class UserService {
 		loginRepository.save(loginHistory);
 	}
 
-	public void SetUserJoin(User user) {
-		log.info("user => " + user.toString());
-		User dbUser = userRepository.save(user);
+	public void userSave(User user)
+	{
+		userRepository.save(user);
+	}
+
+	public void userDelete(User user)
+	{
+		userRepository.delete(user);
+	}
+
+	public int SetUserJoin(User user) throws Exception
+	{
+		int result = 1;
+		log.debug("user =>" + user.toString());
+
+		userSave(user);
 
 		Authority authority = authorityService.findOne(1);
-		UserAuthority userAuthority = UserAuthority.builder().user(dbUser).authority(authority).build();
-
+		UserAuthority userAuthority = UserAuthority.builder().user(user).authority(authority).build();
 		userAuthorityService.SetUserAuthoriy(userAuthority);
+
+		//userService.userDelete(user);
+		//log.error(ex.toString());
+		//result = 0;
+
+		return result;
 	}
 }

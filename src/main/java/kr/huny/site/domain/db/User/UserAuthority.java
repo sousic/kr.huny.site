@@ -23,11 +23,11 @@ public class UserAuthority {
     private Long id;
 
     @OneToOne(fetch =  FetchType.LAZY)
-    @JoinColumn(name = "user_no")
+    @JoinColumn(name = "user_no", nullable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "authority")
+    @JoinColumn(name = "authority", nullable = false)
     private Authority authority;
 
     public Long getId() {

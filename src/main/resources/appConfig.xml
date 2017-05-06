@@ -7,9 +7,9 @@
 
     <jpa:repositories base-package="kr.huny.site.repository"/>
 
-    <tx:annotation-driven/>
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
-    <context:component-scan base-package="kr.huny.site.service, kr.huny.site.repository"/>
+    <context:component-scan base-package="kr.huny.site.service, kr.huny.site.repository, kr.huny.site.facade"/>
     <context:property-placeholder location="classpath:db.properties"/>
 
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
@@ -32,7 +32,8 @@
     </bean>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="dataSource" ref="hikariDataSource"/>
+        <!--<property name="dataSource" ref="hikariDataSource"/>-->
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>

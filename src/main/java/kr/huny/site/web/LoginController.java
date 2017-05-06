@@ -25,6 +25,7 @@ public class LoginController {
     @Autowired
     SHAPasswordEncoder shaPasswordEncoder;
     @Autowired
+    //UserServiceFacade userServiceFacade;
     UserService userService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -77,7 +78,15 @@ public class LoginController {
         User user = User.builder().email(userWrite.getEmail()).nickname(userWrite.getNickName())
                 .pwd(shaPasswordEncoder.encode(userWrite.getPwd())).build();
 
-        userService.SetUserJoin(user);
+        try {
+            userService.SetUserJoin(user);
+        }
+        catch (Exception ex)
+        {
+            log.error(String.valueOf(ex));
+            model.addAttribute(userWrite);
+            return "user/join";
+        }
 
         return "redirect:/login";
     }

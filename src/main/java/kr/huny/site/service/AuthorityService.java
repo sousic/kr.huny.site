@@ -7,13 +7,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-
 /**
  * Created by sousic on 2017-04-28.
  */
 @Service
-@Transactional
 public class AuthorityService {
     @Autowired
     AuthorityRepository authorityRepository;
