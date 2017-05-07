@@ -3,7 +3,7 @@ package kr.huny.site.web;
 import kr.huny.site.common.SHAPasswordEncoder;
 import kr.huny.site.domain.db.User.User;
 import kr.huny.site.domain.web.user.UserWrite;
-import kr.huny.site.service.UserService;
+import kr.huny.site.facade.user.UserFacade;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,8 +25,7 @@ public class LoginController {
     @Autowired
     SHAPasswordEncoder shaPasswordEncoder;
     @Autowired
-    //UserServiceFacade userServiceFacade;
-    UserService userService;
+    UserFacade userFacade;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login()
@@ -79,7 +78,7 @@ public class LoginController {
                 .pwd(shaPasswordEncoder.encode(userWrite.getPwd())).build();
 
         try {
-            userService.SetUserJoin(user);
+            userFacade.SetUserJoin(user);
         }
         catch (Exception ex)
         {

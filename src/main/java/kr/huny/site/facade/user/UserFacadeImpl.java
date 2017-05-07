@@ -1,4 +1,4 @@
-package kr.huny.site.facade;
+package kr.huny.site.facade.user;
 
 import kr.huny.site.domain.db.User.Authority;
 import kr.huny.site.domain.db.User.User;
@@ -10,12 +10,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
+
 /**
  * Created by sousic on 2017-05-06.
  */
 @Component
 @Slf4j
-public class UserServiceFacade {
+public class UserFacadeImpl implements UserFacade {
     @Autowired
     UserService userService;
     @Autowired
@@ -23,7 +25,8 @@ public class UserServiceFacade {
     @Autowired
     AuthorityService authorityService;
 
-    public int SetUserJoin(User user) throws Exception
+    @Transactional
+    public int SetUserJoin(User user)
     {
         int result = 1;
         log.debug("user =>" + user.toString());
