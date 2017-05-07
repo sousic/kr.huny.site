@@ -26,9 +26,8 @@ public class UserFacadeImpl implements UserFacade {
     AuthorityService authorityService;
 
     @Transactional
-    public int SetUserJoin(User user)
+    public void SetUserJoin(User user)
     {
-        int result = 1;
         log.debug("user =>" + user.toString());
 
         userService.userSave(user);
@@ -36,11 +35,5 @@ public class UserFacadeImpl implements UserFacade {
         Authority authority = authorityService.findOne(1);
         UserAuthority userAuthority = UserAuthority.builder().user(user).authority(authority).build();
         userAuthorityService.SetUserAuthoriy(userAuthority);
-
-        //userService.userDelete(user);
-        //log.error(ex.toString());
-        //result = 0;
-
-        return result;
     }
 }
