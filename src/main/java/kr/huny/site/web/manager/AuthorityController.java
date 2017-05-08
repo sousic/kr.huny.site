@@ -1,8 +1,8 @@
 package kr.huny.site.web.manager;
 
-import kr.huny.site.common.PageableHelper;
+import kr.huny.site.common.Helper.PageableHelper;
 import kr.huny.site.domain.db.User.Authority;
-import kr.huny.site.domain.web.user.AuthorityResp;
+import kr.huny.site.domain.web.CommonResp;
 import kr.huny.site.service.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,7 +38,9 @@ public class AuthorityController {
     public String AuthorityList(Model model, @PageableDefault(direction = Sort.Direction.DESC, size = 10, sort = { "authority" }) Pageable pageable)
     {
         Page<Authority> authorities = authorityService.authorityFindAll(PageableHelper.getPageRequest(pageable,sorted));
-        model.addAttribute("authorities", authorities);
+        CommonResp<Authority> authorityResp = new CommonResp<>(authorities);
+
+        model.addAttribute("authorities", authorityResp);
         return "tools/authority/list";
     }
 
@@ -47,14 +49,7 @@ public class AuthorityController {
     {
         Page<Authority> authorities = authorityService.authorityFindAll(PageableHelper.getPageRequest(pageable,sorted));
 
-        AuthorityResp<Authority> authorityResp = new AuthorityResp<>();
-        authorityResp.setList(authorities.getContent());
-        authorityResp.setFirst(authorities.isFirst());
-        authorityResp.setLast(authorities.isLast());
-        authorityResp.setNumber(authorities.getNumber());
-        authorityResp.setSize(authorities.getSize());
-        authorityResp.setTotalPages(authorities.getTotalPages());
-        authorityResp.setTotalElements(authorities.getTotalElements());
+        CommonResp<Authority> authorityResp = new CommonResp<>(authorities);
 
         return authorityResp;
     }

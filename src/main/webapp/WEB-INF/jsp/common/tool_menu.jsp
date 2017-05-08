@@ -1,10 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<c:set var="contextPath" value="<%=request.getContextPath()%>"/>
+
+<c:set var="strURL" value="<%=request.getRequestURL()%>"/>
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="${contextPath}/tools/authority/list">권한관리 <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Reports</a></li>
+                <li <c:if test='${fn:contains(strURL, "/tools/authority/list")}'>class="active"</c:if>><a href="<c:url value="/tools/authority/list"/>">권한관리</a></li>
+                <li <c:if test='${fn:contains(strURL, "/tools/member/list")}'>class="active"</c:if>><a href="<c:url value="/tools/member/list"/>">회원목록</a></li>
                 <li><a href="#">Analytics</a></li>
                 <li><a href="#">Export</a></li>
             </ul>

@@ -1,6 +1,5 @@
 package kr.huny.site.domain.db.User;
 
-import kr.huny.site.domain.db.Login.LoginHistory;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -8,18 +7,17 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.Null;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by sousic on 2017. 3. 5..
  */
 @ToString
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,8 +46,8 @@ public class User {
     @Null
     private UserCode userCode;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<LoginHistory> loginHistoryList = new ArrayList<LoginHistory>();
+    //@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    //private List<LoginHistory> loginHistoryList = new ArrayList<LoginHistory>();
 
     public Long getId() {
         return id;
@@ -115,11 +113,11 @@ public class User {
         this.lastLoginDate = lastLoginDate;
     }
 
-    public List<LoginHistory> getLoginHistoryList() {
-        return loginHistoryList;
+    public UserCode getUserCode() {
+        return userCode;
     }
 
-    public void setLoginHistoryList(List<LoginHistory> loginHistoryList) {
-        this.loginHistoryList = loginHistoryList;
+    public void setUserCode(UserCode userCode) {
+        this.userCode = userCode;
     }
 }

@@ -1,5 +1,6 @@
 package kr.huny.site.domain.db.Login;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import kr.huny.site.domain.db.User.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +19,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @Table(name = "user_loginhistory")
+@JsonAutoDetect
 public class LoginHistory {
     @Column(name = "history_id")
     @Id
