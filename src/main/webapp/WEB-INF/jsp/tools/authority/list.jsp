@@ -23,13 +23,17 @@
 
                 <div class="table-responsive">
                     <table class="table table-striped">
+                        <colgroup>
+                            <col width="300px;">
+                            <col width="*">
+                        </colgroup>
                         <thead>
                         <tr>
                             <th>권한등급</th>
                             <th>권한명</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="authoritylist">
                         <c:forEach items="${authorities.content}" var="item">
                         <tr>
                             <td>${item.authority}</td>
@@ -54,15 +58,28 @@
             page: ${authorities.number+1},
             maxVisible:10
         }).on('page', function(event,num){
-            var url = "/tools/authority/list/json?page=" + num;
-            location.href=url;
+            var url = "/tools/authority/list/json?size=2&page=" + num;
+            refreshList(url);
         });
     });
+
+    function refreshList(url)
+    {
+        var template = Handlebars.compile($("#entry-template").html());
+        $("#authoritylist").html('');
+
+        $.getJSON(url, function(data) {
+            $(data.list).each(function() {
+                var html = template(this);
+                $("#authoritylist").append(html);
+            });
+        });
+    }
 </script>
 <script type="text/x-handlebars-template" id="entry-template">
     <tr>
-        <td>{{item.authority}}</td>
-        <td>{{item.authority_name}}</td>
+        <td>{{authority}}</td>
+        <td>{{authority_name}}</td>
     </tr>
 </script>
 </body>

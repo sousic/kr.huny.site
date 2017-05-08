@@ -1,5 +1,6 @@
 package kr.huny.site.web.manager;
 
+import kr.huny.site.common.PageableHelper;
 import kr.huny.site.domain.db.User.Authority;
 import kr.huny.site.domain.web.user.AuthorityResp;
 import kr.huny.site.service.AuthorityService;
@@ -21,6 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "/tools/authority")
 public class AuthorityController {
 
+    //기본 검색 조건 설정
+    Sort sorted = new Sort(Sort.Direction.DESC, "authority");
+
     @Autowired
     AuthorityService authorityService;
 
@@ -33,7 +37,7 @@ public class AuthorityController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String AuthorityList(Model model, @PageableDefault(direction = Sort.Direction.DESC, size = 10, sort = { "authority" }) Pageable pageable)
     {
-        Page<Authority> authorities = authorityService.authorityFindAll(pageable);
+        Page<Authority> authorities = authorityService.authorityFindAll(PageableHelper.getPageRequest(pageable,sorted));
         model.addAttribute("authorities", authorities);
         return "tools/authority/list";
     }
@@ -41,7 +45,7 @@ public class AuthorityController {
     @RequestMapping(value = "/list/json", method = RequestMethod.GET)
     public @ResponseBody Object getJSONAuthorityList(@PageableDefault(direction = Sort.Direction.DESC, sort = { "authority" }) Pageable pageable)
     {
-        Page<Authority> authorities = authorityService.authorityFindAll(pageable);
+        Page<Authority> authorities = authorityService.authorityFindAll(PageableHelper.getPageRequest(pageable,sorted));
 
         AuthorityResp<Authority> authorityResp = new AuthorityResp<>();
         authorityResp.setList(authorities.getContent());
@@ -54,4 +58,6 @@ public class AuthorityController {
 
         return authorityResp;
     }
+
+
 }
