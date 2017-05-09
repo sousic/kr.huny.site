@@ -8,6 +8,14 @@
         <mvc:argument-resolvers>
             <bean class="org.springframework.data.web.PageableHandlerMethodArgumentResolver"/>
         </mvc:argument-resolvers>
+        <mvc:message-converters>
+            <!-- Use the HibernateAware mapper instead of the default -->
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="kr.huny.site.common.HibernateAwareObjectMapper" />
+                </property>
+            </bean>
+        </mvc:message-converters>
     </mvc:annotation-driven>
 
     <context:component-scan base-package="kr.huny.site"/>

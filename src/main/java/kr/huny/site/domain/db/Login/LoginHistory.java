@@ -1,11 +1,8 @@
 package kr.huny.site.domain.db.Login;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import kr.huny.site.domain.db.User.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,24 +12,29 @@ import java.util.Date;
  */
 @ToString
 @Entity
+@Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Table(name = "user_loginhistory")
-@JsonAutoDetect
 public class LoginHistory {
     @Column(name = "history_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name="user_no", nullable = false)
+    private Long userNo;
+
+    @JsonUnwrapped
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_no")
+    @JoinColumn(name = "user_no", referencedColumnName = "user_no")
+    @MapsId("user_no")
     private User user;
 
     private Date loginDate;
 
-    public Long getId() {
+    /*public Long getId() {
         return id;
     }
 
@@ -40,12 +42,12 @@ public class LoginHistory {
         this.id = id;
     }
 
-    public User getMember() {
-        return user;
+    public Long getUserNo() {
+        return userNo;
     }
 
-    public void setMember(User user) {
-        this.user = user;
+    public void setUserNo(Long userNo) {
+        this.userNo = userNo;
     }
 
     public Date getLoginDate() {
@@ -54,5 +56,5 @@ public class LoginHistory {
 
     public void setLoginDate(Date loginDate) {
         this.loginDate = loginDate;
-    }
+    }*/
 }

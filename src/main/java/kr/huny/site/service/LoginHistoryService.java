@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
  * Created by sousic on 2017. 5. 8..
  */
 @Service
-public class LoginHisotryService {
+public class LoginHistoryService {
     @Autowired
     LoginHistoryRepository loginHistoryRepository;
 
-    public Page<LoginHistory> findLoginHistoryByUser_IdOrderByIdIdDesc(Pageable pageable, Long User_Id)
+    public Page<LoginHistory> findByUserNo(Pageable pageable, Long User_Id)
     {
-        return loginHistoryRepository.findLoginHistoryByUser_Id(pageable, User_Id);
+        return loginHistoryRepository.findByUserNo(pageable, User_Id);
     }
 }

@@ -1,7 +1,6 @@
 package kr.huny.site.authentication;
 
 import kr.huny.site.domain.db.Login.LoginHistory;
-import kr.huny.site.domain.db.User.User;
 import kr.huny.site.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,8 +81,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             	userInfo = ((UserInfo)principal);
             }
     	}
-    	User user = User.builder().id(userInfo.getUser_no()).build();
-        LoginHistory loginHistory = LoginHistory.builder().user(user).loginDate(new Date()).build();
+        LoginHistory loginHistory = LoginHistory.builder().userNo(userInfo.getUser_no()).loginDate(new Date()).build();
 
         log.debug((loginHistory.toString()));
 
