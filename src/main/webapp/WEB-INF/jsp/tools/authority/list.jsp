@@ -34,7 +34,7 @@
                         </tr>
                         </thead>
                         <tbody id="authoritylist">
-                        <c:forEach items="${authorities.content}" var="item">
+                        <c:forEach items="${authorities.list}" var="item">
                         <tr>
                             <td>${item.authority}</td>
                             <td>${item.authority_name}</td>
