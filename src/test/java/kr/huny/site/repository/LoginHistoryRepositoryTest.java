@@ -25,7 +25,7 @@ public class LoginHistoryRepositoryTest {
 
     @Test
     public void findByUserNo() throws Exception {
-        Page<LoginHistory> loginHistoryList = loginHistoryRepository.findByUserNo(new PageRequest(0,10), userNo);
+        Page<LoginHistory> loginHistoryList = loginHistoryRepository.findByUserNo(userNo,new PageRequest(0,10));
 
         logger.debug("loginHistoryList =>" + loginHistoryList.getContent().size());
         logger.debug(loginHistoryList.getContent().get(0).toString());

@@ -15,8 +15,8 @@ public class LoginHistoryService {
     @Autowired
     LoginHistoryRepository loginHistoryRepository;
 
-    public Page<LoginHistory> findByUserNo(Pageable pageable, Long User_Id)
+    public Page<LoginHistory> findByUserno(Pageable pageable, Long User_Id)
     {
-        return loginHistoryRepository.findByUserNo(pageable, User_Id);
+        return loginHistoryRepository.findByUserNo(User_Id,pageable);
     }
 }
