@@ -7,6 +7,8 @@ import kr.huny.site.service.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +31,7 @@ public class AuthorityController {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String AuthorityList(Model model, Pageable pageable)
+    public String AuthorityList(Model model, @PageableDefault(direction = Sort.Direction.DESC, sort = "authority") Pageable pageable)
     {
         Page<Authority> authorities = authorityService.findAll(PageableHelper.getPageRequest(pageable));
         CommonResp<Authority> authorityResp = new CommonResp<>(authorities);
@@ -39,7 +41,7 @@ public class AuthorityController {
     }
 
     @RequestMapping(value = "/list/json", method = RequestMethod.GET)
-    public @ResponseBody Object getJSONAuthorityList(Pageable pageable)
+    public @ResponseBody Object getJSONAuthorityList(@PageableDefault(direction = Sort.Direction.DESC, sort = "authority") Pageable pageable)
     {
         Page<Authority> authorities = authorityService.findAll(PageableHelper.getPageRequest(pageable));
 

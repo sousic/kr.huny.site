@@ -55,7 +55,7 @@
     $(function(){
         $("#pageNavi").bootpag({
             total: ${authorities.totalPages},
-            page: ${authorities.number+1},
+            page: ${authorities.number}+1,
             maxVisible:10
         }).on('page', function(event,num){
             var url = "/tools/authority/list/json?size=2&page=" + num;

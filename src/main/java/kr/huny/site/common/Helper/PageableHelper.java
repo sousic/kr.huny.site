@@ -18,6 +18,6 @@ public class PageableHelper {
     }
 
     public static PageRequest getPageRequest(Pageable pageable, Sort sort) {
-        return new PageRequest(pageable.getPageNumber() > 0 ? pageable.getPageNumber()-1 : pageable.getPageNumber(),pageable.getPageSize(), sort);
+        return new PageRequest(pageable.getPageNumber(),pageable.getPageSize(), sort);
     }
 }

@@ -7,6 +7,8 @@ import kr.huny.site.service.LoginHistoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +28,7 @@ public class LoginHistoryController {
     LoginHistoryService loginHistoryService;
 
     @RequestMapping(value = "/detail/json/{user_no}", method = RequestMethod.GET)
-    public @ResponseBody Object listUserLoginHistory(@PathVariable Long user_no, Pageable pageable)
+    public @ResponseBody Object listUserLoginHistory(@PathVariable Long user_no, @PageableDefault(direction = Sort.Direction.DESC, sort = "id") Pageable pageable)
     {
         CommonResp<LoginHistory> loginHistory = new CommonResp<>(loginHistoryService.findByUserNo(PageableHelper.getPageRequest(pageable), user_no));
 

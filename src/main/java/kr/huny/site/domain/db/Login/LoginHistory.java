@@ -1,5 +1,6 @@
 package kr.huny.site.domain.db.Login;
 
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import kr.huny.site.domain.db.User.User;
 import lombok.*;
 
@@ -25,6 +26,7 @@ public class LoginHistory {
     @Column(name="user_no", nullable = false)
     private Long userNo;
 
+    @JsonUnwrapped
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_no", referencedColumnName = "user_no")
     @MapsId("user_no")
