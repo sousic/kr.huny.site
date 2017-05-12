@@ -1,5 +1,6 @@
 package kr.huny.site.web.manager;
 
+import kr.huny.site.common.Helper.PageableHelper;
 import kr.huny.site.domain.db.User.User;
 import kr.huny.site.domain.web.CommonResp;
 import kr.huny.site.service.UserService;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping(value = "/tools/member")
 public class MemberController {
-    Sort sorted = new Sort(Sort.Direction.DESC, "user_no");
+    Sort sorted = new Sort("id");
 
     @Autowired
     UserService userService;
@@ -33,7 +34,7 @@ public class MemberController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model, Pageable pageable)
     {
-        CommonResp<User> userList = new CommonResp<>(userService.findAll(pageable));
+        CommonResp<User> userList = new CommonResp<>(userService.findAll(PageableHelper.getPageRequest(pageable)));
         model.addAttribute("userList", userList);
         return "tools/member/list";
     }

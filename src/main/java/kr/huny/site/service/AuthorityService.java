@@ -15,7 +15,7 @@ public class AuthorityService {
     @Autowired
     AuthorityRepository authorityRepository;
 
-    public Page<Authority> authorityFindAll(Pageable pageable)
+    public Page<Authority> findAll(Pageable pageable)
     {
         return authorityRepository.findAll(pageable);
     }

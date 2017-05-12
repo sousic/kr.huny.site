@@ -13,6 +13,10 @@ public class PageableHelper {
      * @param pageable
      * @return
      */
+    public static PageRequest getPageRequest(Pageable pageable) {
+        return getPageRequest(pageable, pageable.getSort());
+    }
+
     public static PageRequest getPageRequest(Pageable pageable, Sort sort) {
         return new PageRequest(pageable.getPageNumber() > 0 ? pageable.getPageNumber()-1 : pageable.getPageNumber(),pageable.getPageSize(), sort);
     }
