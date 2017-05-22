@@ -58,7 +58,7 @@
             page: ${authorities.number}+1,
             maxVisible:10
         }).on('page', function(event,num){
-            var url = "/tools/authority/list/json?size=2&page=" + num;
+            var url = "<c:url value="/tools/authority/list/json"/>?page=" + num;
             refreshList(url);
         });
     });
@@ -68,11 +68,12 @@
         var template = Handlebars.compile($("#entry-template").html());
         $("#authoritylist").html('');
 
-        $.getJSON(url, function(data) {
-            $(data.list).each(function() {
+        $.getJSON(url,function(){})
+        .done(function(data) {
+            $(data.list).each(function () {
                 var html = template(this);
                 $("#authoritylist").append(html);
-            });
+            })
         });
     }
 </script>

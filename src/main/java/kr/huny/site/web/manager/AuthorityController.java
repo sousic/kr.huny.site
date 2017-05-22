@@ -41,7 +41,8 @@ public class AuthorityController {
     }
 
     @RequestMapping(value = "/list/json", method = RequestMethod.GET)
-    public @ResponseBody Object getJSONAuthorityList(@PageableDefault(direction = Sort.Direction.DESC, sort = "authority") Pageable pageable)
+    @ResponseBody
+    public Object getJSONAuthorityList(@PageableDefault(direction = Sort.Direction.DESC, sort = "authority") Pageable pageable)
     {
         Page<Authority> authorities = authorityService.findAll(PageableHelper.getPageRequest(pageable));
 

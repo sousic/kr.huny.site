@@ -28,7 +28,8 @@ public class LoginHistoryController {
     LoginHistoryService loginHistoryService;
 
     @RequestMapping(value = "/detail/json/{user_no}", method = RequestMethod.GET)
-    public @ResponseBody Object listUserLoginHistory(@PathVariable Long user_no, @PageableDefault(direction = Sort.Direction.DESC, sort = "id") Pageable pageable)
+    @ResponseBody
+    public Object listUserLoginHistory(@PathVariable Long user_no, @PageableDefault(direction = Sort.Direction.DESC, sort = "id") Pageable pageable)
     {
         CommonResp<LoginHistory> loginHistory = new CommonResp<>(loginHistoryService.findByUserNo(PageableHelper.getPageRequest(pageable), user_no));
 

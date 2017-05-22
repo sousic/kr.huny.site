@@ -72,34 +72,63 @@
             page: ${userList.number+1},
             maxVisible:10
         }).on('page', function(event,num){
-            var url = "/tools/authority/list/json?size=2&page=" + num;
+            var url = "<c:url value="/tools/member/list/json"/>?page=" + num;
             refreshList(url);
         });
     });
 
     function refreshList(url)
     {
-        var template = Handlebars.compile($("#entry-template").html());
-        $("#authoritylist").html('');
+        var template = Handlebars.compile($("#entry-user-template").html());
+        $("#list").html('');
 
         $.getJSON(url, function(data) {
             $(data.list).each(function() {
                 var html = template(this);
-                $("#authoritylist").append(html);
+                $("#list").append(html);
             });
         });
     }
 
     function viewLoginHistory(user_no)
     {
-        var url = "<c:url value="/tools/login/history/detail/json/"/>" + user_no;
-        console.log(user_no);
+        if($.trim(user_no) == '') {
+            alert("잘못된 접근 입니다.");
+            return false;
+        } else {
+            var url = "<c:url value="/tools/login/history/detail/json/"/>" + user_no;
+            var template = Handlebars.compile($("#entry-user-history-template").html());
+            $("#userLoginHistoryLists").html('');
+
+            $.getJSON(url,function(){})
+                .done(function (data) {
+                $(data.list).each(function () {
+                    var html = template(this);
+                    $("#userLoginHistoryLists").append(html);
+                    console.log(this);
+                });
+                $("#loginHistroyModel").modal();
+            });
+        }
     }
 </script>
-<script type="text/x-handlebars-template" id="entry-template">
+<script type="text/x-handlebars-template" id="entry-user-template">
     <tr>
-        <td>{{authority}}</td>
-        <td>{{authority_name}}</td>
+        <td>{{id}}</td>
+        <td>{{email}}</td>
+        <td>{{pwdChangeDate}}</td>
+        <td>{{nickname}}</td>
+        <td>{{regDate}}</td>
+        <td>{{grade}}</td>
+        <td>{{lastLoginDate}}</td>
+        <td>{{userCode.name}}</td>
+        <td><button onclick="viewLoginHistory({{id}});" class="btn btn-info">로그인기록</button></td>
+    </tr>
+</script>
+<script type="text/x-handlebars-template" id="entry-user-history-template">
+    <tr>
+        <td>{{id}}</td>
+        <td>{{loginDate}}</td>
     </tr>
 </script>
 
@@ -109,16 +138,26 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"></h4>
+                <h4 class="modal-title">접속로그기록</h4>
             </div>
-            <div class="modal-body" data-rno>
-                <p><input type="text" id="replytext" class="form-control"></p>
+            <div class="modal-body">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>일련번호</th>
+                        <th>최종접속</th>
+                    </tr>
+                    </thead>
+                    <tbody id="userLoginHistoryLists">
+
+                    </tbody>
+                </table>
             </div>
-            <div class="modal-footer">
+            <%--<div class="modal-footer">
                 <button type="button" class="btn btn-info" id="replyModBtn">Modify</button>
                 <button type="button" class="btn btn-danger" id="replyDelBtn">DELETE</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+            </div>--%>
         </div>
     </div>
 </div>
