@@ -39,7 +39,7 @@ public class User {
 
     private int grade;
 
-    private int lastLoginDate;
+    private Date lastLoginDate;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "code")
@@ -105,11 +105,11 @@ public class User {
         this.grade = grade;
     }
 
-    public int getLastLoginDate() {
+    public Date getLastLoginDate() {
         return lastLoginDate;
     }
 
-    public void setLastLoginDate(int lastLoginDate) {
+    public void setLastLoginDate(Date lastLoginDate) {
         this.lastLoginDate = lastLoginDate;
     }
 
