@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Slf4j
 @Service
 public class UserService {
@@ -37,5 +39,15 @@ public class UserService {
 
 	public Page<User> findAll(Pageable pageable){
 		return userRepository.findAll(pageable);
+	}
+
+	public User findOne(Long userid){
+		return userRepository.findOne(userid);
+	}
+
+	public void updateUserLastLoginDate(long user_no) {
+		User user = userRepository.findOne(user_no);
+		user.setLastLoginDate(new Date());
+		userRepository.save(user);
 	}
 }

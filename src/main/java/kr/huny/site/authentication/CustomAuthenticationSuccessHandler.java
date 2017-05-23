@@ -81,6 +81,9 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             	userInfo = ((UserInfo)principal);
             }
     	}
+
+    	userService.updateUserLastLoginDate(userInfo.getUser_no());
+
         LoginHistory loginHistory = LoginHistory.builder().userNo(userInfo.getUser_no()).loginDate(new Date()).build();
 
         log.debug((loginHistory.toString()));
