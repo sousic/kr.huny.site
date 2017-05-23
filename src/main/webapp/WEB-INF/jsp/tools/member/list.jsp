@@ -75,7 +75,28 @@
             var url = "<c:url value="/tools/member/list/json"/>?page=" + num;
             refreshList(url);
         });
+
+        $("#pageLoginNavi").bootpag({
+            maxVisible:10
+        }).on('page', function(event,num) {
+            var url = "<c:url value="/tools/login/history/detail/json/"/>"+ $("#userNo").val() +"?page=" + num;
+            refreshHisotryList($(this),url);
+        });
     });
+
+    function refreshHisotryList(pageHistoryNavi, url)
+    {
+        var template = Handlebars.compile($("#entry-user-history-template").html());
+        $("#userLoginHistoryLists").html('');
+
+        $.getJSON(url, function(){}).success(function(data) {
+            $(data.list).each(function() {
+                var html = template(this);
+                $("#userLoginHistoryLists").append(html);
+            });
+            pageHistoryNavi.bootpag({total:data.totalPages,page:parseInt(data.number)+1});
+        });
+    }
 
     function refreshList(url)
     {
@@ -105,8 +126,9 @@
                 $(data.list).each(function () {
                     var html = template(this);
                     $("#userLoginHistoryLists").append(html);
-                    console.log(this);
                 });
+                $("#userNo").val(user_no);
+                $("#pageLoginNavi").bootpag({total:data.totalPages,page:parseInt(data.number)+1});
                 $("#loginHistroyModel").modal();
             });
         }
@@ -139,19 +161,27 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">접속로그기록</h4>
+                <input type="hidden" id="userNo" value=""/>
             </div>
             <div class="modal-body">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>일련번호</th>
-                        <th>최종접속</th>
-                    </tr>
-                    </thead>
-                    <tbody id="userLoginHistoryLists">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>일련번호</th>
+                            <th>최종접속</th>
+                        </tr>
+                        </thead>
+                        <tbody id="userLoginHistoryLists">
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center">
+                    <div id="pageLoginNavi" class="center">
+
+                    </div>
+                </div>
             </div>
             <%--<div class="modal-footer">
                 <button type="button" class="btn btn-info" id="replyModBtn">Modify</button>
