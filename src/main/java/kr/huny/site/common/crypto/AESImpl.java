@@ -21,12 +21,12 @@ public class AESImpl implements ICrypto {
 
     @Override
     public byte[] encrypt(byte[] data) {
-        return new byte[0];
+        return crypt(data, Cipher.ENCRYPT_MODE);
     }
 
     @Override
     public byte[] decrypt(byte[] data) {
-        return new byte[0];
+        return crypt(data, Cipher.DECRYPT_MODE);
     }
 
     private byte[] crypt(byte[] data, int encryptMode)

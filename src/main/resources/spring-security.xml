@@ -39,7 +39,13 @@
         <!--</security:authentication-provider>-->
     </security:authentication-manager>
 
-    <bean id="cookieSecurityConextRepository" class="kr.huny.site.authentication.cookie.CookieSecurityConextRepository"/>
+    <bean id="cookieSecurityConextRepository" class="kr.huny.site.authentication.cookie.CookieSecurityConextRepository">
+        <constructor-arg name="cookieSecurityService" ref="cookieSecurityService"/>
+    </bean>
+    <bean id="cookieSecurityService" class="kr.huny.site.authentication.cookie.CookieSecurityService">
+        <constructor-arg name="cookieName" value="HJC"/>
+        <constructor-arg name="encryptKey" value="test1234!@#$"/>
+    </bean>
 
     <bean id="shaPasswordEncoder" class="kr.huny.site.common.crypto.SHAPasswordEncoder"/>
 

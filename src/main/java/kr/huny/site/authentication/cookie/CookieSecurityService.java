@@ -72,8 +72,13 @@ public class CookieSecurityService {
     public Cookie removeCookie()
     {
         Cookie cookie = new Cookie(cookieName, "");
-        cookie.setPath(cookePath);;
+        cookie.setPath(cookePath);
         cookie.setMaxAge(0);
         return cookie;
+    }
+
+    public boolean containsSecurityCookie(HttpServletRequest request)
+    {
+        return getSecurityCookieForm(request) != null;
     }
 }
