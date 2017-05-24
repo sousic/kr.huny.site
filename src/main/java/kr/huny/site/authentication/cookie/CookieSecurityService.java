@@ -5,8 +5,10 @@ import kr.huny.site.common.crypto.ICrypto;
 import kr.huny.site.common.serializer.IAuthSerializer;
 import kr.huny.site.common.serializer.IAuthSerializerImpl;
 import org.springframework.security.core.Authentication;
+import org.springframework.util.Base64Utils;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by sousic on 2017-05-24.
@@ -35,7 +37,43 @@ public class CookieSecurityService {
 
     public Authentication getAuthenticationFrom(Cookie cookie)
     {
+        byte[] decodedFromBase64 = Base64Utils.decodeFromString(cookie.getValue());
+        byte[] decrpytAuthentication = iCrypto.decrypt(decodedFromBase64);
+
+        return iAuthSerializer.read(decrpytAuthentication);
+    }
+
+    public Cookie setSecurityCookie(Authentication object)
+    {
+        byte[] serializedAuthentication = iAuthSerializer.write(object);
+        byte[] encrpytAuthentication = iCrypto.encrypt(serializedAuthentication);
+        String endcodedWithBase64 = Base64Utils.encodeToString(encrpytAuthentication);
+
+        Cookie cookie = new Cookie(cookieName, endcodedWithBase64);
+        cookie.setPath(cookePath);
+
+        return cookie;
+    }
+
+    public Cookie getSecurityCookieForm(HttpServletRequest request)
+    {
+        Cookie[] cookies = request.getCookies();
+        if(cookies != null)
+        {
+            for(Cookie cookie : cookies) {
+                if(cookie.getName().equals(cookieName)){
+                    return cookie;
+                }
+            }
+        }
         return null;
-        //byte[] decodedFromBase64 = Base64.decodeBase64(cookie.getValue());
+    }
+
+    public Cookie removeCookie()
+    {
+        Cookie cookie = new Cookie(cookieName, "");
+        cookie.setPath(cookePath);;
+        cookie.setMaxAge(0);
+        return cookie;
     }
 }
