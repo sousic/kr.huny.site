@@ -1,8 +1,7 @@
-package kr.huny.site.common;
+package kr.huny.site.common.crypto;
 
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by sousic on 2017-03-30.

@@ -2,7 +2,7 @@ package kr.huny.site.authentication;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kr.huny.site.common.SHAPasswordEncoder;
+import kr.huny.site.common.crypto.SHAPasswordEncoder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;

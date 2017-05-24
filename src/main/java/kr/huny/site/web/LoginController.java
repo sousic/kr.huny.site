@@ -1,6 +1,6 @@
 package kr.huny.site.web;
 
-import kr.huny.site.common.SHAPasswordEncoder;
+import kr.huny.site.common.crypto.SHAPasswordEncoder;
 import kr.huny.site.domain.db.User.User;
 import kr.huny.site.domain.web.user.UserWrite;
 import kr.huny.site.facade.user.UserFacade;

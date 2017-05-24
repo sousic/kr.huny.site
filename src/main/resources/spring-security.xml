@@ -41,7 +41,7 @@
 
     <bean id="cookieSecurityConextRepository" class="kr.huny.site.authentication.cookie.CookieSecurityConextRepository"/>
 
-    <bean id="shaPasswordEncoder" class="kr.huny.site.common.SHAPasswordEncoder"/>
+    <bean id="shaPasswordEncoder" class="kr.huny.site.common.crypto.SHAPasswordEncoder"/>
 
     <bean id="customAuthenticationProvider" class="kr.huny.site.authentication.CustomAuthenticationProvider"/>
 
