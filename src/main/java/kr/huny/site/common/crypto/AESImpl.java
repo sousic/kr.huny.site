@@ -36,7 +36,7 @@ public class AESImpl implements ICrypto {
             byte[] secretKeyByteRepresentation = secretKey.getEncoded();
 
             SecretKeySpec secretKeySpec = new SecretKeySpec(secretKeyByteRepresentation, ALGORITHM);
-            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            Cipher cipher = Cipher.getInstance(ALGORITHM);
             cipher.init(encryptMode, secretKeySpec);
 
             return cipher.doFinal(data);
@@ -50,7 +50,7 @@ public class AESImpl implements ICrypto {
     private SecretKey generateSecretKey() {
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance(ALGORITHM);
-            SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
+            SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG"); //"AES/CBC/PKCS5Padding"
             secureRandom.setSeed(key.getBytes());
             keyGenerator.init(KEY_SIZE_IN_BITS, secureRandom);
 

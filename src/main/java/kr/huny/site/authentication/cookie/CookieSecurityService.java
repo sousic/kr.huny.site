@@ -37,7 +37,7 @@ public class CookieSecurityService {
 
     public Authentication getAuthenticationFrom(Cookie cookie)
     {
-        byte[] decodedFromBase64 = Base64Utils.decodeFromString(cookie.getValue());
+        byte[] decodedFromBase64 = Base64Utils.decodeFromUrlSafeString(cookie.getValue());
         byte[] decrpytAuthentication = iCrypto.decrypt(decodedFromBase64);
 
         return iAuthSerializer.read(decrpytAuthentication);
@@ -47,7 +47,7 @@ public class CookieSecurityService {
     {
         byte[] serializedAuthentication = iAuthSerializer.write(object);
         byte[] encrpytAuthentication = iCrypto.encrypt(serializedAuthentication);
-        String endcodedWithBase64 = Base64Utils.encodeToString(encrpytAuthentication);
+        String endcodedWithBase64 = Base64Utils.encodeToUrlSafeString(encrpytAuthentication);
 
         Cookie cookie = new Cookie(cookieName, endcodedWithBase64);
         cookie.setPath(cookePath);

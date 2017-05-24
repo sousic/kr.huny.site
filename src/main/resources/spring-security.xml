@@ -7,7 +7,7 @@
     <security:http pattern="/*.ico" security="none"/>
     <security:http pattern="/resources/**" security="none"/>
 
-    <security:http auto-config="true" security-context-repository-ref="cookieSecurityConextRepository">
+    <security:http auto-config="true" security-context-repository-ref="cookieSecurityConextRepository" disable-url-rewriting="true">
         <security:access-denied-handler error-page="/403"/>
         <security:intercept-url pattern="/login"  access="permitAll"/>
         <security:intercept-url pattern="/join"  access="permitAll"/>

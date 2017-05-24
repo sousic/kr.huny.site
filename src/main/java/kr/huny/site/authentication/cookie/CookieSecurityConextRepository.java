@@ -25,7 +25,7 @@ public class CookieSecurityConextRepository implements SecurityContextRepository
     public SecurityContext loadContext(HttpRequestResponseHolder httpRequestResponseHolder) {
         HttpServletRequest request = httpRequestResponseHolder.getRequest();
 
-        SaveToSessionResponseWrapper responseWrapper = new SaveToSessionResponseWrapper(httpRequestResponseHolder.getResponse(), false);
+        SaveToSessionResponseWrapper responseWrapper = new SaveToSessionResponseWrapper(httpRequestResponseHolder.getResponse(), true);
         httpRequestResponseHolder.setResponse(responseWrapper);
 
         SecurityContext context = SecurityContextHolder.createEmptyContext();
@@ -80,6 +80,7 @@ public class CookieSecurityConextRepository implements SecurityContextRepository
                 }
             } else {
                 addCookie(cookie);
+                //addCookie(cookieSecurityService.removeCookie());
             }
         }
     }
