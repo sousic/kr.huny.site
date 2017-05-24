@@ -7,7 +7,7 @@
     <security:http pattern="/*.ico" security="none"/>
     <security:http pattern="/resources/**" security="none"/>
 
-    <security:http auto-config="true">
+    <security:http auto-config="true" security-context-repository-ref="cookieSecurityConextRepository">
         <security:access-denied-handler error-page="/403"/>
         <security:intercept-url pattern="/login"  access="permitAll"/>
         <security:intercept-url pattern="/join"  access="permitAll"/>
@@ -38,6 +38,8 @@
             <!--</security:password-encoder>-->
         <!--</security:authentication-provider>-->
     </security:authentication-manager>
+
+    <bean id="cookieSecurityConextRepository" class="kr.huny.site.authentication.cookie.CookieSecurityConextRepository"/>
 
     <bean id="shaPasswordEncoder" class="kr.huny.site.common.SHAPasswordEncoder"/>
 
