@@ -112,11 +112,11 @@
             <!--<scope>compile</scope>-->
         <!--</dependency>-->
 
-        <dependency>
+        <!--<dependency>
             <groupId>commons-codec</groupId>
             <artifactId>common-codec</artifactId>
             <version>1.9</version>
-        </dependency>
+        </dependency>-->
 
         <!-- web -->
         <dependency>
