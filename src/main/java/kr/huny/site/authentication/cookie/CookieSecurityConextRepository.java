@@ -13,6 +13,12 @@ import javax.servlet.http.HttpServletResponse;
  * Created by sousic on 2017-05-24.
  */
 public class CookieSecurityConextRepository implements SecurityContextRepository {
+    private final CookieSecurityService cookieSecurityService;
+
+    public CookieSecurityConextRepository(CookieSecurityService cookieSecurityService) {
+        this.cookieSecurityService = cookieSecurityService;
+    }
+
     @Override
     public SecurityContext loadContext(HttpRequestResponseHolder httpRequestResponseHolder) {
         HttpServletRequest request = httpRequestResponseHolder.getRequest();

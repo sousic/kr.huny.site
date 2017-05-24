@@ -112,6 +112,12 @@
             <!--<scope>compile</scope>-->
         <!--</dependency>-->
 
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>common-codec</artifactId>
+            <version>1.9</version>
+        </dependency>
+
         <!-- web -->
         <dependency>
             <groupId>javax.servlet</groupId>
