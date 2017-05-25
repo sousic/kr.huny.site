@@ -3,6 +3,7 @@ package kr.huny.site.common.crypto;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.SecureRandom;
 
@@ -14,9 +15,22 @@ public class AESImpl implements ICrypto {
 
     private static final int KEY_SIZE_IN_BITS = 128;
     private final String key;
+    private final String initVector;
+
+    public AESImpl(String key, String initVector) {
+        this.key = key;
+        if (key.length() != 256 / 8) {
+            throw new IllegalArgumentException("'secretKey' must be 256 bit");
+        }
+        this.initVector = initVector;
+    }
 
     public AESImpl(String key) {
+        if (key.length() != 256 / 8) {
+            throw new IllegalArgumentException("'secretKey' must be 256 bit");
+        }
         this.key = key;
+        this.initVector = "qwerasdfzxcv1234";
     }
 
     @Override
@@ -36,8 +50,9 @@ public class AESImpl implements ICrypto {
             byte[] secretKeyByteRepresentation = secretKey.getEncoded();
 
             SecretKeySpec secretKeySpec = new SecretKeySpec(secretKeyByteRepresentation, ALGORITHM);
-            Cipher cipher = Cipher.getInstance(ALGORITHM);
-            cipher.init(encryptMode, secretKeySpec);
+            IvParameterSpec iv = new IvParameterSpec(initVector.getBytes("UTF-8"));
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            cipher.init(encryptMode, secretKeySpec, iv);
 
             return cipher.doFinal(data);
         }

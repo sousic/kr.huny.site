@@ -44,7 +44,7 @@
     </bean>
     <bean id="cookieSecurityService" class="kr.huny.site.authentication.cookie.CookieSecurityService">
         <constructor-arg name="cookieName" value="HJC"/>
-        <constructor-arg name="encryptKey" value="test1234!@#$"/>
+        <constructor-arg name="encryptKey" value="test1234!@#$test1234!@#$test1234"/>
     </bean>
 
     <bean id="shaPasswordEncoder" class="kr.huny.site.common.crypto.SHAPasswordEncoder"/>
