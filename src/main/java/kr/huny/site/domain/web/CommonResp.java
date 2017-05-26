@@ -1,35 +1,19 @@
 package kr.huny.site.domain.web;
 
-import lombok.*;
-import org.springframework.data.domain.Page;
-
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
- * 목록에 사용할공용 반환 클래스
- * @param <T>
+ * Created by sousic on 2017. 5. 26..
  */
 @Data
-@ToString
 @NoArgsConstructor
-public class CommonResp<T> {
-
-    public CommonResp(Page<T> page) {
-        list = page.getContent();
-        last = page.isLast();
-        first = page.isFirst();
-        totalPages = page.getTotalPages();
-        size = page.getSize();
-        number = page.getNumber();
-        totalElements = page.getTotalElements();
-    }
-
-    private List<T> list;
-
-    private boolean last;
-    private boolean first;
-    private int totalPages;
-    private int size;
-    private int number;
-    private Long totalElements;
+@AllArgsConstructor
+@Builder
+public class CommonResp {
+    private int errCode;
+    private String errMsg;
+    private String extraMsg;
 }

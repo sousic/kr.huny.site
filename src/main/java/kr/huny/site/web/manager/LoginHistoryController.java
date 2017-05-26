@@ -2,7 +2,7 @@ package kr.huny.site.web.manager;
 
 import kr.huny.site.common.Helper.PageableHelper;
 import kr.huny.site.domain.db.Login.LoginHistory;
-import kr.huny.site.domain.web.CommonResp;
+import kr.huny.site.domain.web.CommonPageResp;
 import kr.huny.site.service.LoginHistoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class LoginHistoryController {
     @ResponseBody
     public Object listUserLoginHistory(@PathVariable Long user_no, @PageableDefault(direction = Sort.Direction.DESC, sort = "id") Pageable pageable)
     {
-        CommonResp<LoginHistory> loginHistory = new CommonResp<>(loginHistoryService.findByUserNo(PageableHelper.getPageRequest(pageable), user_no));
+        CommonPageResp<LoginHistory> loginHistory = new CommonPageResp<>(loginHistoryService.findByUserNo(PageableHelper.getPageRequest(pageable), user_no));
 
         return loginHistory;
     }

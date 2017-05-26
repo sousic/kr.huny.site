@@ -27,12 +27,12 @@ public class UserService {
 		loginHistoryRepository.save(loginHistory);
 	}
 
-	public void userSave(User user)
+	public void save(User user)
 	{
 		userRepository.save(user);
 	}
 
-	public void userDelete(User user)
+	public void delete(User user)
 	{
 		userRepository.delete(user);
 	}

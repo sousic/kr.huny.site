@@ -30,7 +30,7 @@ public class UserFacadeImpl implements UserFacade {
     {
         log.debug("user =>" + user.toString());
 
-        userService.userSave(user);
+        userService.save(user);
 
         Authority authority = authorityService.findOne(1);
         UserAuthority userAuthority = UserAuthority.builder().user(user).authority(authority).build();

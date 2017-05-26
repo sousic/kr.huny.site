@@ -24,4 +24,9 @@ public class AuthorityService {
     {
         return authorityRepository.findOne(authority_no);
     }
+
+    public void save(Authority authority)
+    {
+        authorityRepository.save(authority);
+    }
 }

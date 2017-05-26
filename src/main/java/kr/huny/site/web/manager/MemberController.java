@@ -2,7 +2,7 @@ package kr.huny.site.web.manager;
 
 import kr.huny.site.common.Helper.PageableHelper;
 import kr.huny.site.domain.db.User.User;
-import kr.huny.site.domain.web.CommonResp;
+import kr.huny.site.domain.web.CommonPageResp;
 import kr.huny.site.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ public class MemberController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String Memberlist(Model model, @PageableDefault(direction = Sort.Direction.DESC, sort = "id") Pageable pageable)
     {
-        CommonResp<User> userList = new CommonResp<>(userService.findAll(PageableHelper.getPageRequest(pageable)));
+        CommonPageResp<User> userList = new CommonPageResp<>(userService.findAll(PageableHelper.getPageRequest(pageable)));
         model.addAttribute("userList", userList);
         return "tools/member/list";
     }
@@ -48,7 +48,7 @@ public class MemberController {
     {
         Page<User> userList = userService.findAll(PageableHelper.getPageRequest(pageable));
 
-        CommonResp<User> userResp = new CommonResp<>(userList);
+        CommonPageResp<User> userResp = new CommonPageResp<>(userList);
 
         return userResp;
     }

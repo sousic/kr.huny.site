@@ -26,11 +26,13 @@
                         <colgroup>
                             <col width="300px;">
                             <col width="*">
+                            <col width="100px;" align="center"/>
                         </colgroup>
                         <thead>
                         <tr>
                             <th>권한등급</th>
                             <th>권한명</th>
+                            <th>동</th>
                         </tr>
                         </thead>
                         <tbody id="authoritylist">
@@ -38,6 +40,9 @@
                         <tr>
                             <td>${item.authority}</td>
                             <td>${item.authority_name}</td>
+                            <td>
+                                <span class="btn btn-default modify" data-authority="${item.authority}">수정</span>
+                            </td>
                         </tr>
                         </c:forEach>
                         </tbody>
@@ -61,6 +66,22 @@
             var url = "<c:url value="/tools/authority/list/json"/>?page=" + num;
             refreshList(url);
         });
+
+        $("#authoritylist").on("click",".modify", function() {
+           //alert($(this).data("authority"));
+            $("#authority").val($(this).data("authority"));
+            $("#authority_name").val($(this).parents("tr").find("td:eq(1)").text());
+            $("#authorityModal").modal();
+        });
+
+        $("#replyModBtn").click(function() {
+            $.getJSON('<c:url value="/tools/authority/authority/update"/>', $("#aForm").serialize(), function(data){
+                if(data.errCode == 1) {
+                    refreshList('<c:url value="/tools/authority/list/json"/>?page='+$("#pageNavi .active").text());
+                    $("#authorityModal").modal('hide');
+                }
+            });
+        });
     });
 
     function refreshList(url)
@@ -81,7 +102,38 @@
     <tr>
         <td>{{authority}}</td>
         <td>{{authority_name}}</td>
+        <td>
+            <span class="btn btn-default modify" data-authority="{{authority}}">수정</span>
+        </td>
     </tr>
 </script>
+
+<div id="authorityModal" class="modal modal-primary fade" role="dialog">
+    <div class="modal-dialog">
+        <form id="aForm" method="post" data-toggle="validator" role="form" onsubmit="return false;">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">권한명수정</h4>
+                <input type="hidden" id="authority" name="authority" value=""/>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="addon_authority_name">권한명</span>
+                        <input type="text" id="authority_name" name="authority_name" value="" class="form-control" placeholder="권한명을 넣어주세요." data-error="권한명을 넣어주세요." aria-describedby="addon_authority_name" required >
+                    </div>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-info" id="replyModBtn">완료</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>
