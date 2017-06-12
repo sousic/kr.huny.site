@@ -48,6 +48,9 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="text-right">
+                    <a href="javascript:" class="btn btn-default btn-info" id="regAuth">등록</a>
+                </div>
                 <div class="text-center">
                     <div id="pageNavi" class="center">
 
@@ -68,9 +71,9 @@
         });
 
         $("#authoritylist").on("click",".modify", function() {
-           //alert($(this).data("authority"));
             $("#authority").val($(this).data("authority"));
             $("#authority_name").val($(this).parents("tr").find("td:eq(1)").text());
+            $("#authorityModal #title").text("권한명수정");
             $("#authorityModal").modal();
         });
 
@@ -82,7 +85,33 @@
                 }
             });
         });
+
+        $("#regAuth").on("click", function() {
+            $.post('<c:url value="/tools/authority/authority/create"/>',$("#aForm").serialize(), function(data) {
+                if(data.errCode == 1) {
+                    refreshList('<c:url value="/tools/authority/list/json"/>?page='+$("#pageNavi .active").text());
+                    $("#authorityModal").modal('hide');
+                }
+            }, "json");
+        });
+
+        $("#regAuth").on("click", function() {
+            $("#authorityModal #title").text("권한명등록");
+            $("#authorityModal #authWrapper").show();
+            $("#authorityModal").modal();
+        });
+
+        $('#authorityModal').on('hide.bs.modal', function (e) {
+            resetAuthorityModel();
+        });
     });
+
+    function resetAuthorityModel()
+    {
+        $("#authority").val('');
+        $("#authority_name").val('');
+        $("#authorityModal #authWrapper").hide();
+    }
 
     function refreshList(url)
     {
@@ -115,10 +144,16 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">권한명수정</h4>
-                <input type="hidden" id="authority" name="authority" value=""/>
+                <h4 class="modal-title" id="title"></h4>
             </div>
             <div class="modal-body">
+                <div class="form-group" style="display: none;" id="authWrapper">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="addon_authority">권한번호</span>
+                        <input type="text" id="authority" name="authority" value="" class="form-control" placeholder="권한명을 넣어주세요." data-error="권한번호를 넣어주세요." aria-describedby="addon_authority" required >
+                    </div>
+                    <div class="help-block with-errors"></div>
+                </div>
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon" id="addon_authority_name">권한명</span>

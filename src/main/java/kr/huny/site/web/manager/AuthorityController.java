@@ -72,4 +72,24 @@ public class AuthorityController {
 
         return commonResp;
     }
+
+    @RequestMapping(value = "/authority/create", method=RequestMethod.POST, produces = {"application/json"})
+    @ResponseBody
+    public Object createAuthority(Authority authority)
+    {
+        log.info(authority.toString());
+        CommonResp commonResp = CommonResp.builder().errCode(1).build();
+
+        try {
+            authorityService.save(authority);
+            commonResp.setErrMsg("등록에 성공 했습니다.");
+        }
+        catch (Exception ex)
+        {
+            commonResp.setErrCode(-99);
+            commonResp.setErrMsg("등록에 실패 했습니다.");
+        }
+
+        return commonResp;
+    }
 }
